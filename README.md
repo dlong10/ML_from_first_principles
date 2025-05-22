@@ -1,5 +1,4 @@
-#**Machine Learning from First Principles**
-
+# **Machine Learning from First Principles**
 ##
 My notes on key Machine Learning concepts - trying to understand and derive algorithms from scratch.
 
