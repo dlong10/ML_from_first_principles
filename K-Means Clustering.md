@@ -89,6 +89,7 @@ centroids (ndarray): updated coordinates of centroids with shape (K, n); K centr
 ```
 
 4) Once we have updated the position of the centroids, iterate over the process! Reassign examples to centroids, update position of centroids based on newly assigned examples...
-
+```python
 def runkMeans(X, initial_centroids, max_iters = 10):
   pass
+```
