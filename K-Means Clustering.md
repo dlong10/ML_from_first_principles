@@ -13,14 +13,15 @@ The process of K-Means Clustering is:
 
 ```python
 def random_initialisation_centroids(X,K):
-"""
-Args:
-X (ndarray): training set of shape (m,n); m examples, n features
-K (int): desired number of centroids
+  """
+  Args:
+  X (ndarray): training set of shape (m,n); m examples, n features
+  K (int): desired number of centroids
+  
+  Returns:
+  centroids: initial coordinates of centroids with shape (K, n); K centroids, n coordinates
+  """
 
-Returns:
-centroids: initial coordinates of centroids with shape (K, n); K centroids, n coordinates
-"""
   randidx = np.random.permutation(X.shape[0]) # Randomly reorder the indices of examples
 
   # We will then take K random examples as the first coordinates for our centroids
@@ -36,14 +37,15 @@ centroids: initial coordinates of centroids with shape (K, n); K centroids, n co
 
 ```python
 def find_closest_centroids(X, centroids):
-"""
-Args:
-X (ndarray): training set of shape (m,n); m examples, n features
-centroids (ndarray): coordinates of centroids with shape (K,n); K centroids, n coordinates
+  """
+  Args:
+  X (ndarray): training set of shape (m,n); m examples, n features
+  centroids (ndarray): coordinates of centroids with shape (K,n); K centroids, n coordinates
+  
+  Returns:
+  idx (1d-array): list with each value storing an integer from 0 -> K-1, corresponding to the centroid closest to each example, with shape (m,); m examples
+  """
 
-Returns:
-idx (1d-array): list with each value storing an integer from 0 -> K-1, corresponding to the centroid closest to each example, with shape (m,); m examples
-"""
   K = centroids.shape[0] # Set value of K
 
   # Create ([0,0,0,...]) of length m - one '0' for each of our m-examples.
@@ -68,15 +70,16 @@ idx (1d-array): list with each value storing an integer from 0 -> K-1, correspon
 
 ```python
 def compute_centroids(X, idx, K):
-"""
-Args:
-X (ndarray): training set of shape (m,n); m examples, n features
-idx (1d-array): an array of shape (m,) where each element is an integer from 0 to K-1, indicating the index of the closest centroid for each of the m examples.
-K (int): number of centroids
+  """
+  Args:
+  X (ndarray): training set of shape (m,n); m examples, n features
+  idx (1d-array): an array of shape (m,) where each element is an integer from 0 to K-1, indicating the index of the closest centroid for each of the m examples.
+  K (int): number of centroids
+  
+  Returns:
+  centroids (ndarray): updated coordinates of centroids with shape (K, n); K centroids, n coordinates
+  """
 
-Returns:
-centroids (ndarray): updated coordinates of centroids with shape (K, n); K centroids, n coordinates
-"""
   # Start by iterating through each of the K centroids
   for j in range(K):
     # Extract the examples that have been assigned to centroid 'j'
@@ -91,5 +94,28 @@ centroids (ndarray): updated coordinates of centroids with shape (K, n); K centr
 4) Once we have updated the position of the centroids, iterate over the process! Reassign examples to centroids, update position of centroids based on newly assigned examples...
 ```python
 def runkMeans(X, initial_centroids, max_iters = 10):
-  pass
+  """
+  Args:
+  X (ndarray): training set of shape (m,n); m examples, n features
+  initial_centroids (ndarray): initial coordinates of centroids with shape (K, n); K centroids, n features
+  max_iters (int): How many iterations do you want to run K-means clustering for?
+  
+  Returns:
+  centroids (ndarry): final coordinates of centroids with shape (K, n); K centroids, n features
+  idx (1d-array): list of values from 0 to K-1, showing (final) corresponding centroid id for each example; shape(m,); m examples
+  """
+
+  m,n = X.shape #
+  K = initial_centroids.shape[0]
+  centroids = initial_centroids
+  previous_centroids = centroids
+  idx = np.zeros(m)
+  
+  #run K-means iteratively
+  for i in range(max_iters):
+    idx = find_closest_centroid(X, centroids)
+    centroids = compute_centroids(X, idx, K)
+  
+  return centroids,idx
 ```
+
