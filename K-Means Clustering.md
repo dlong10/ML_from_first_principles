@@ -9,7 +9,7 @@ Examples of when this technique might be used include:
 
 The process of K-Means Clustering is:
 
-1) Randomly plot 'K' cluster centroids (where K is an integer, denoting number of centroids)
+1) **Randomly plot** 'K' cluster centroids (where K is an integer, denoting number of centroids)
 
 ```python
 def random_initialisation_centroids(X,K):
@@ -32,7 +32,7 @@ def random_initialisation_centroids(X,K):
 ```
 
 
-2) Once we have the initial coordinates for our centroids, we assign points to one of our K-centroids based on proximity
+2) Once we have the initial coordinates for our centroids, we **assign** points to one of our K-centroids based on proximity
 
 
 ```python
@@ -91,7 +91,7 @@ def compute_centroids(X, idx, K):
   return centroids
 ```
 
-4) Once we have updated the position of the centroids, iterate over the process! Reassign examples to centroids, update position of centroids based on newly assigned examples...
+4) Once we have updated the position of the centroids, **iterate** over the process! Reassign examples to centroids, update position of centroids based on newly assigned examples...
 ```python
 def runkMeans(X, initial_centroids, max_iters = 10):
   """
